@@ -7,9 +7,10 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 import src.Utils.*;
+import src.DataStructure.Coordinate;
 
 public class Polynomial {
-    private List<Double> coefficients;
+    private final List<Double> coefficients;
 
     /**
      * Constructor for Polynomial
@@ -227,7 +228,7 @@ public class Polynomial {
         return 0; // No root found
     }
 
-    public double findInitialGuess(Polynomial polynomial) {
+    private double findInitialGuess(Polynomial polynomial) {
         double lower = -10; // Starting lower bound for search
         double upper = 10;  // Starting upper bound for search
         double stepSize = 0.1; // Step size for finding initial guesses
@@ -258,5 +259,42 @@ public class Polynomial {
             }
         }
         return newRoots;
+    }
+
+    public List<Coordinate> extrema() {
+        Polynomial poly = this;
+        Polynomial firstDerivative = poly.derivative();
+        Polynomial secondDerivative = firstDerivative.derivative();
+        List<Coordinate> result = new ArrayList<Coordinate>();
+        if(firstDerivative.coefficients.size() >= 2) {
+            List<Double> roots = firstDerivative.findRoots();
+            for(double root : roots) {
+                if(secondDerivative.evaluate(root) > 0){
+                    result.add(new Coordinate(root, poly.evaluate(root), "Tiefpunkt"));
+                }else if(secondDerivative.evaluate(root) < 0){
+                    result.add(new Coordinate(root, poly.evaluate(root), "Höhepunkt"));
+                }
+            }
+        }
+        return result;
+    }
+
+    public List<Coordinate> inflection() {
+        Polynomial poly = this;
+        Polynomial secondDerivative = poly.derivative().derivative();
+        Polynomial thirdDerivative = secondDerivative.derivative();
+
+        List<Coordinate> result = new ArrayList<Coordinate>();
+        if(secondDerivative.coefficients.size() > 1) {
+            List<Double> roots = secondDerivative.findRoots();
+            for(double root : roots) {
+                if(thirdDerivative.evaluate(root) > 0){
+                    result.add(new Coordinate(root, poly.evaluate(root), "R-L-Wendepunkt"));
+                }else if(thirdDerivative.evaluate(root) < 0){
+                    result.add(new Coordinate(root, poly.evaluate(root), "L-R-Wendepunkt"));
+                }
+            }
+        }
+        return result;
     }
 }
