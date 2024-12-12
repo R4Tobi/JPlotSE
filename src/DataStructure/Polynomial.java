@@ -10,7 +10,7 @@ import src.Utils.*;
 import src.DataStructure.Coordinate;
 
 public class Polynomial {
-    private List<Double> coefficients;
+    private final List<Double> coefficients;
 
     /**
      * Constructor for Polynomial

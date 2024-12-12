@@ -3,7 +3,7 @@ package src.DataStructure;
 public class Coordinate {
     private double x;
     private double y;
-    private String type;
+    private final String type;
 
     public Coordinate(double x, double y) {
         this.x = x;
@@ -36,10 +36,6 @@ public class Coordinate {
 
     public String getType() {
         return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     @Override
