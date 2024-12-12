@@ -126,7 +126,7 @@ public class Polynomial {
         return sb.toString();
     }
 
-    public List<Double> findRoots() {
+    public List<Double[]> findRoots() {
         List<Double> roots = new ArrayList<>();
         Polynomial current = this;
 
@@ -171,7 +171,11 @@ public class Polynomial {
 
         roots = ListUtils.removeDuplicates(roots);
         roots = validateRoots(roots);
-        return roots;
+        ArrayList<Double[]> rootsxy = new ArrayList<Double[]>();
+        for(double root : roots){
+            rootsxy.add(new Double[]{root, evaluate(root)});
+        }
+        return rootsxy;
     }
 
     // Helper function: Perform polynomial division by (x - r)
@@ -258,5 +262,11 @@ public class Polynomial {
             }
         }
         return newRoots;
+    }
+
+    public List<Double[]> extrema(Polynomial poly) {
+        List<Double[]> roots = poly.derivative().findRoots();
+        System.out.println(roots.isEmpty());
+        return new ArrayList<>();
     }
 }
