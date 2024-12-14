@@ -297,4 +297,18 @@ public class Polynomial {
         }
         return result;
     }
+
+    public Polynomial integral() {
+        double[] integralCoeffs = new double[coefficients.size() + 1];
+        integralCoeffs[0] = 0;
+        for (int i = 0; i < coefficients.size(); i++) {
+            integralCoeffs[i + 1] = coefficients.get(i) / (i + 1);
+        }
+        return new Polynomial(integralCoeffs);
+    }
+
+    public double getArea(double a, double b) {
+        Polynomial integral = integral();
+        return integral.evaluate(b) - integral.evaluate(a);
+    }
 }

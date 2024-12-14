@@ -20,6 +20,8 @@ class Main {
             System.out.println("\n");
             System.out.println("Polynom      " + polynomial.toString());
             System.out.println("1. Ableitung " + polynomial.derivative().toString());
+            System.out.println("Stammfunktion  " + polynomial.integral().toString() + " + C");
+            System.out.println("Wert des Integrals von 0 bis 1: " + polynomial.integral().getArea(0, 1));
             System.out.println("Nullstellen  " + polynomial.findRoots());
             System.out.println("Extremstellen " + polynomial.extrema());
             System.out.println("Wendestellen  " + polynomial.inflection());
