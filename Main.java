@@ -1,5 +1,6 @@
 import src.DataStructure.Polynomial;
 import src.UserInterface.PolynomialGUI;
+import src.Utils.ListUtils;
 
 import java.util.Arrays;
 
@@ -11,6 +12,7 @@ class Main {
         Polynomial p4 = new Polynomial("3x+1");
         Polynomial p5 = new Polynomial("x^3 + x - 5");
         Polynomial p6 = new Polynomial(new double[]{-6, 11, -6, 1});
+        Polynomial p7 = new Polynomial(new double[]{-6, 11, -6, 1, 4, -4, 8, 3});
 
         Polynomial[] polynomials = {p, p2, p3, p4, p5, p6};
 
@@ -18,7 +20,11 @@ class Main {
             System.out.println("\n");
             System.out.println("Polynom      " + polynomial.toString());
             System.out.println("1. Ableitung " + polynomial.derivative().toString());
+            System.out.println("Stammfunktion  " + polynomial.integral().toString() + " + C");
+            System.out.println("Wert des Integrals von 0 bis 1: " + polynomial.integral().getArea(0, 1));
             System.out.println("Nullstellen  " + polynomial.findRoots());
+            System.out.println("Extremstellen " + polynomial.extrema());
+            System.out.println("Wendestellen  " + polynomial.inflection());
         }
 
         PolynomialGUI.main(new String[]{});
