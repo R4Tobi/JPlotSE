@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"Alle Klassen und Schnittstellen","u":"allclasses-index.html"},{"p":"src.Utils","l":"ArrayUtils"},{"p":"src.DataStructure","l":"Coordinate"},{"p":"src.UserInterface","l":"Launcher"},{"p":"src.Utils","l":"ListUtils"},{"p":"src.DataStructure","l":"Polynomial"},{"p":"src.UserInterface","l":"PolynomialPlotter"}];updateSearchResults();
