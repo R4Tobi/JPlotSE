@@ -29,7 +29,7 @@ public class Polynomial {
      */
     public Polynomial(String polynom) {
         //remove whitespaces from String using RegEx Pattern
-        polynom = polynom.replaceAll("\\s+", "").replaceAll("\\+-", "-");
+        polynom = polynom.replaceAll("\\s+", "").replaceAll("\\+-", "-").replaceAll(",", ".");
 
         //create Regex Pattern for Expressions like x^2, 2x^4, -3, 4x
         Pattern termPattern = Pattern.compile("([+-]?\\d*\\.?\\d*)x?(?:\\^(\\d+))?"); // This Pattern was created using AI: model GPT-4o, prompt: "Create a regex pattern for expressions like x^2, 2x^4, -3, 4x"
@@ -84,6 +84,13 @@ public class Polynomial {
             coefficients.add(c);
         }
     }
+    public double[] getCoeffients(){
+        double[] coeffs = new double[coefficients.size()];
+        for (int i = 0; i < coeffs.length; i++) {
+            coeffs[i] = coefficients.get(i);
+        }
+        return coeffs;
+    }
 
     public double evaluate(double x) {
         double result = 0;
@@ -112,7 +119,7 @@ public class Polynomial {
             double coeff = coefficients.get(i);
             if (coeff == 0) continue;
             if (!sb.isEmpty()) {
-                sb.append(coeff > 0 ? " + " : " - ");
+                sb.append(coeff < 0 ? " + " : " - ");
             }
             if (Math.abs(coeff) != 1 || i == 0) {
                 sb.append(Math.abs(coeff));
