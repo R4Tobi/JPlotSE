@@ -1,10 +1,10 @@
+
 import src.DataStructure.Polynomial;
 import src.UserInterface.PolynomialGUI;
-import src.Utils.ListUtils;
+import src.Tests.TestNumeric;
 
-import java.util.Arrays;
 
-class Main {
+public class Main {
     public static void main(String[] args) {
         Polynomial p = new Polynomial(new double[]{2, 1});
         Polynomial p2 = new Polynomial("1 + 2x - 3x^2");
@@ -26,6 +26,8 @@ class Main {
             System.out.println("Extremstellen " + polynomial.extrema());
             System.out.println("Wendestellen  " + polynomial.inflection());
         }
+
+        TestNumeric.main(new String[]{});
 
         PolynomialGUI.main(new String[]{});
     }
