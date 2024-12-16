@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+/**
+ * Class to work with Java Arrays.
+ */
 public class ArrayUtils {
     /**
      * Removes duplicate entries from an array.

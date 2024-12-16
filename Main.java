@@ -1,8 +1,5 @@
 import src.DataStructure.Polynomial;
-import src.UserInterface.PolynomialGUI;
-import src.Utils.ListUtils;
-
-import java.util.Arrays;
+import src.UserInterface.Launcher;
 
 class Main {
     public static void main(String[] args) {
@@ -27,6 +24,6 @@ class Main {
             System.out.println("Wendestellen  " + polynomial.inflection());
         }
 
-        PolynomialGUI.main(new String[]{});
+        Launcher.main(new String[]{});
     }
 }
