@@ -1,7 +1,7 @@
 
 import src.DataStructure.Polynomial;
 import src.UserInterface.PolynomialGUI;
-import src.Tests.TestNumeric;
+import src.Tests.TestPolynomial;
 
 
 public class Main {
@@ -27,7 +27,7 @@ public class Main {
             System.out.println("Wendestellen  " + polynomial.inflection());
         }
 
-        TestNumeric.main(new String[]{});
+        TestPolynomial.main(new String[]{});
 
         PolynomialGUI.main(new String[]{});
     }
