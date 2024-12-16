@@ -1,7 +1,7 @@
-import src.DataStructure.Polynomial;
-import src.UserInterface.Launcher;
 
-class Main {
+import src.DataStructure.Polynomial;
+
+public class Main {
     public static void main(String[] args) {
         Polynomial p = new Polynomial(new double[]{2, 1});
         Polynomial p2 = new Polynomial("1 + 2x - 3x^2");
@@ -23,6 +23,7 @@ class Main {
             System.out.println("Extremstellen " + polynomial.extrema());
             System.out.println("Wendestellen  " + polynomial.inflection());
         }
+
 
         Launcher.main(new String[]{});
     }
