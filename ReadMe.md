@@ -6,7 +6,7 @@ You will find a JavaDoc Documentation of our Project in the `/documents` Folder.
 
 ## Deployment / Usage
 
-1. go to Releases.
+1. go to (Releases)[https://github.com/R4Tobi/JPlotSE/releases].
 2. download either source code or jar file.
 3. Run JPlotSE
   - From Source code 
