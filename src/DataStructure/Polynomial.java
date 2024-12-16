@@ -119,7 +119,10 @@ public class Polynomial {
             double coeff = coefficients.get(i);
             if (coeff == 0) continue;
             if (!sb.isEmpty()) {
-                sb.append(coeff < 0 ? " + " : " - ");
+                sb.append(coeff > 0 ? " + " : " - ");
+            }
+            if(coeff < 0 && i == coefficients.size() - 1){
+                sb.append("-");
             }
             if (Math.abs(coeff) != 1 || i == 0) {
                 sb.append(Math.abs(coeff));
