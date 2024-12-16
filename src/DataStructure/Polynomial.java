@@ -7,8 +7,10 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 import src.Utils.*;
-import src.DataStructure.Coordinate;
 
+/**
+ * Class for Polynomials and related methods.
+ */
 public class Polynomial {
     private final List<Double> coefficients;
 
@@ -92,6 +94,23 @@ public class Polynomial {
         return coeffs;
     }
 
+    /**
+     * get coefficients of the Polynom as Array of Doubles
+     * @return coefficients
+     */
+    public double[] getCoeffients(){
+        double[] coeffs = new double[coefficients.size()];
+        for (int i = 0; i < coeffs.length; i++) {
+            coeffs[i] = coefficients.get(i);
+        }
+        return coeffs;
+    }
+
+    /**
+     * get value of polynomial for specific value
+     * @param x value
+     * @return value of the polynomial
+     */
     public double evaluate(double x) {
         double result = 0;
         for (int i = 0; i < coefficients.size(); i++) {
@@ -100,7 +119,10 @@ public class Polynomial {
         return result;
     }
 
-    // Berechnet die Ableitung des Polynoms als neues Polynomial-Objekt
+    /**
+     * get derivative of a polynomial.
+     * @return derived polynomial
+     */
     public Polynomial derivative() {
         if (coefficients.size() <= 1) {
             return new Polynomial(new double[]{0});
@@ -112,6 +134,10 @@ public class Polynomial {
         return new Polynomial(derivativeCoeffs);
     }
 
+    /**
+     * get String of polynomial
+     * @return polynomial
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -120,6 +146,9 @@ public class Polynomial {
             if (coeff == 0) continue;
             if (!sb.isEmpty()) {
                 sb.append(coeff < 0 ? " + " : " - ");
+            }
+            if(coeff < 0 && i == coefficients.size() - 1){
+                sb.append("-");
             }
             if (Math.abs(coeff) != 1 || i == 0) {
                 sb.append(Math.abs(coeff));
@@ -134,6 +163,10 @@ public class Polynomial {
         return sb.toString();
     }
 
+    /**
+     * find Roots using Newton's algorithm
+     * @return roots
+     */
     public List<Double> findRoots() {
         List<Double> roots = new ArrayList<>();
         Polynomial current = this;
@@ -268,6 +301,10 @@ public class Polynomial {
         return newRoots;
     }
 
+    /**
+     * get extrema of a polynomial. Uses findRoots.
+     * @return Coordinates
+     */
     public List<Coordinate> extrema() {
         Polynomial poly = this;
         Polynomial firstDerivative = poly.derivative();
@@ -279,13 +316,17 @@ public class Polynomial {
                 if(secondDerivative.evaluate(root) > 0){
                     result.add(new Coordinate(root, poly.evaluate(root), "Tiefpunkt"));
                 }else if(secondDerivative.evaluate(root) < 0){
-                    result.add(new Coordinate(root, poly.evaluate(root), "Höhepunkt"));
+                    result.add(new Coordinate(root, poly.evaluate(root), "Hochpunkt"));
                 }
             }
         }
         return result;
     }
 
+    /**
+     * get inflections of a polynomial. Uses findRoots.
+     * @return Coordinates
+     */
     public List<Coordinate> inflection() {
         Polynomial poly = this;
         Polynomial secondDerivative = poly.derivative().derivative();
@@ -305,6 +346,10 @@ public class Polynomial {
         return result;
     }
 
+    /**
+     * integrate a Polynomial
+     * @return primitive of a Polynomial without constant c.
+     */
     public Polynomial integral() {
         double[] integralCoeffs = new double[coefficients.size() + 1];
         integralCoeffs[0] = 0;
@@ -314,6 +359,12 @@ public class Polynomial {
         return new Polynomial(integralCoeffs);
     }
 
+    /**
+     * get value of the Area under a graph
+     * @param a Start of Interval
+     * @param b End of Interval
+     * @return area
+     */
     public double getArea(double a, double b) {
         Polynomial integral = integral();
         return integral.evaluate(b) - integral.evaluate(a);
