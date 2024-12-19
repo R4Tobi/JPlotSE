@@ -2,6 +2,7 @@ package src.Tests;
 
 import src.DataStructure.Polynomial;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class TestPolynomial {
@@ -19,6 +20,7 @@ public class TestPolynomial {
     public static void main(String[] args) {
         testConstructor();
         testToString();
+        testEvaluate();
     }
 
     public static void testConstructor(){
@@ -81,5 +83,33 @@ public class TestPolynomial {
         else{
             System.out.println("Failed!");
         }
+    }
+
+    public static void testEvaluate(){
+        System.out.println("-------------------");
+        System.out.println("Testing evaluate");
+        System.out.println("-------------------");
+        Polynomial[] polynomials = testPolynomials;
+        double[] xValues = new double[]{0.3, 2, 3, 4, 5, 6, 7, 8};
+        double[] expectedValues = new double[]{0.09, 9.0, -564, 16.0, 0.0, 14.399999999999999, 18.2, 1874.0};
+        boolean passed = true;
+        for(int i = 0; i < polynomials.length; i++){
+            System.out.println(polynomials[i].evaluate(xValues[i]) + " Expected: " + expectedValues[i]);
+            if(polynomials[i].evaluate(xValues[i]) != expectedValues[i]){
+                passed = false;
+            }
+        }
+        if(passed){
+            System.out.println("Passed!");
+        }
+        else{
+            System.out.println("Failed!");
+        }
+    }
+
+    public static void testFindRoots() {
+        System.out.println("-------------------");
+        System.out.println("Testing findRoots");
+        System.out.println("-------------------");
     }
 }

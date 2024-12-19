@@ -19,7 +19,7 @@ public class Launcher {
         // Create the frame
         JFrame frame = new JFrame("Input Processor");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 200);
+        frame.setSize(800, 500);
         frame.setLayout(new BorderLayout());
 
         // Create the input panel
