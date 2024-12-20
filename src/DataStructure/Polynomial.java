@@ -86,14 +86,7 @@ public class Polynomial {
             coefficients.add(c);
         }
     }
-    public double[] getCoeffients(){
-        double[] coeffs = new double[coefficients.size()];
-        for (int i = 0; i < coeffs.length; i++) {
-            coeffs[i] = coefficients.get(i);
-        }
-        return coeffs;
-    }
-
+   
     /**
      * get coefficients of the Polynom as Array of Doubles
      * @return coefficients
