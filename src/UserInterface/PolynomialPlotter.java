@@ -1,15 +1,14 @@
 package src.UserInterface;
 
 import src.DataStructure.Polynomial;
+import src.DataStructure.Coordinate;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 
-/**
- * Class to plot a Polynomial
- */
 public class PolynomialPlotter extends JPanel {
     private final Polynomial polynomial;
     private double scaleX = 50;
@@ -17,20 +16,46 @@ public class PolynomialPlotter extends JPanel {
     private double translateY = 0;
     private Point dragStart;
 
-    /**
-     * Constructor to pass the polynomial
-     * @param polynomial Polynomial to be plotted
-     */
     public PolynomialPlotter(Polynomial polynomial) {
         this.polynomial = polynomial;
+        adjustDisplayInterval();
         addMouseListener(new PanHandler());
         addMouseMotionListener(new PanHandler());
     }
 
-    /**
-     * Build Graph
-     * @param g the <code>Graphics</code> object to protect
-     */
+    private void adjustDisplayInterval() {
+        List<Double> roots = polynomial.findRoots();
+        List<Coordinate> extrema = polynomial.extrema();
+        List<Coordinate> inflections = polynomial.inflection();
+
+        double minX = Double.POSITIVE_INFINITY;
+        double maxX = Double.NEGATIVE_INFINITY;
+        double minY = Double.POSITIVE_INFINITY;
+        double maxY = Double.NEGATIVE_INFINITY;
+
+        for (double root : roots) {
+            minX = Math.min(minX, root);
+            maxX = Math.max(maxX, root);
+        }
+
+        for (Coordinate coord : extrema) {
+            minX = Math.min(minX, coord.getX());
+            maxX = Math.max(maxX, coord.getX());
+            minY = Math.min(minY, coord.getY());
+            maxY = Math.max(maxY, coord.getY());
+        }
+
+        for (Coordinate coord : inflections) {
+            minX = Math.min(minX, coord.getX());
+            maxX = Math.max(maxX, coord.getX());
+            minY = Math.min(minY, coord.getY());
+            maxY = Math.max(maxY, coord.getY());
+        }
+
+        translateX = -(minX + maxX) / 2 * scaleX + (double) getWidth() / 2;
+        translateY = (minY + maxY) / 2 * scaleX - (double) getHeight() / 2;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -40,22 +65,16 @@ public class PolynomialPlotter extends JPanel {
         int height = getHeight();
 
         coordinate.setColor(Color.BLACK);
-
         coordinate.setStroke(new BasicStroke(2));
         coordinate.drawLine(0, height / 2 + (int) translateY, width, height / 2 + (int) translateY); // x-axis
         coordinate.drawLine(width / 2 + (int) translateX, 0, width / 2 + (int) translateX, height); // y-axis
 
-        for (int i = -10; i <= 10; i++) {
+        for (int i = -100; i <= 100; i++) {
             int x = width / 2 + (int) (i * scaleX + translateX);
             int y = height / 2 - (int) (i * scaleX - translateY);
 
-            // label x-Axis
             if (i != 0) {
                 coordinate.drawString(Integer.toString(i), x - 5, height / 2 + 15 + (int) translateY);
-            }
-
-            // label y-Axis
-            if (i != 0) {
                 coordinate.drawString(Integer.toString(i), width / 2 + 5 + (int) translateX, y + 5);
             }
         }
